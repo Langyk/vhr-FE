@@ -1,12 +1,12 @@
 <template>
 <div>
-  Test2
+  系统管理
 </div>
 </template>
 
 <script>
 export default {
-name: "Test2"
+  name: "SysCfg"
 }
 </script>
 
