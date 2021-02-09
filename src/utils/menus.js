@@ -4,6 +4,7 @@ export const initMenu = (router, store) => {
     if (store.state.routes.length > 0) {
         return;
     }
+    // 取出数据库中的所有菜单项
     getRequest("/system/config/menu").then(data => {
         if (data) {
             let fmtRoutes = formatRoutes(data);
