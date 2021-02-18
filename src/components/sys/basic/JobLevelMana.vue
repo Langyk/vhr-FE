@@ -63,6 +63,9 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-button type="danger" size="small" style="margin-top: 10px" :disabled="multipleSelection.length==0"
+                 @click="deleteMany">批量删除
+      </el-button>
     </div>
 
     <el-dialog
@@ -151,6 +154,28 @@ export default {
     this.initJls();
   },
   methods:{
+    deleteMany() {
+      this.$confirm('此操作将永久删除【' + this.multipleSelection.length + '】条记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let ids = '?';
+        this.multipleSelection.forEach(item => {
+          ids += 'ids=' + item.id + '&';
+        })
+        this.deleteRequest("/system/basic/joblevel/" + ids).then(resp => {
+          if (resp) {
+            this.initJls();
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
     doUpdate() {
       this.putRequest("/system/basic/joblevel/", this.updateJl).then(resp => {
         if (resp) {
