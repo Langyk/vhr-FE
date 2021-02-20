@@ -22,7 +22,7 @@ export default {
   name: "SysBasic",
   data(){
       return{
-        activeName:'permissmana'
+        activeName:'depmana'
       }
   },
   // 将在components目录下定义好的组件加进来，我们可以直接使用
